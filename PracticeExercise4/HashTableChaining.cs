@@ -100,13 +100,33 @@ namespace PracticeExercise4
         // TODO
         public bool ContainsValue(V value)
         {
-            throw new NotImplementedException();
+            foreach (LinkedList<Bucket<K, V>> list in bucketListsArray)
+            {
+                foreach(var bucket in list)
+                {
+                    if (bucket.Value.Equals(value))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         // TODO
         public V Get(K key)
         {
-            throw new NotImplementedException();
+            foreach (LinkedList<Bucket<K, V>> list in bucketListsArray)
+            {
+                foreach (var bucket in list)
+                {
+                    if (bucket.Key.Equals(key))
+                    {
+                        return bucket.Value;
+                    }
+                }
+            }
+            return default(V);
         }
 
         public List<K> GetKeys()
@@ -115,7 +135,7 @@ namespace PracticeExercise4
 
             foreach(LinkedList< Bucket<K,V>> list in bucketListsArray)
             {
-                foreach( var bucket in list)
+                foreach (var bucket in list)
                 {
                     keys.Add(bucket.Key);
                 }
@@ -127,7 +147,15 @@ namespace PracticeExercise4
         // TODO
         public List<V> GetValues()
         {
-            throw new NotImplementedException();
+            List<V> values = new List<V>();
+            foreach (LinkedList<Bucket<K, V>> list in bucketListsArray)
+            {
+                foreach (var bucket in list)
+                {
+                    values.Add(bucket.Value);
+                }
+            }
+            return values;
         }
 
         public bool Remove(K key)
